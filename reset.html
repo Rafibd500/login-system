@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Reset Password</title>
+  </head>
+  <body>
+    <h1 class="mb-3">Reset Password</h1>
+
+    <form id="resetpass-form" class="w-25 m-4">
+        <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="new-password" placeholder="New Password" required>
+            <label for="new-password">New Password</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="password" class="form-control" id="confirm-password" placeholder="Confirm Password" required>
+            <label for="confirm-password">Confirm Password</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Reset Password</button>
+    </form>
+
+    <!-- Modal -->
+    <div class="modal fade" id="responseModal" tabindex="-1" aria-labelledby="responseModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="responseModalLabel">Notification</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" id="modal-message">
+            <!-- Message will be inserted here -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, verifyPasswordResetCode, confirmPasswordReset } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        
+        const firebaseConfig = {
+          apiKey: "AIzaSyCXPuGA3Xv2dq9HMMCHJ-Ymj9nAPcRRyfg",
+          authDomain: "ashik-login-web-1cdb2.firebaseapp.com",
+          projectId: "ashik-login-web-1cdb2",
+          storageBucket: "ashik-login-web-1cdb2.appspot.com",
+          messagingSenderId: "889582262349",
+          appId: "1:889582262349:web:82ff1f75f563e46c802404"
+        };
+      
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        const resetPassForm = document.getElementById("resetpass-form");
+        const newPasswordInput = document.getElementById("new-password");
+        const confirmPasswordInput = document.getElementById("confirm-password");
+        const responseModal = new bootstrap.Modal(document.getElementById('responseModal'));
+        const modalMessage = document.getElementById("modal-message");
+
+        const showModal = (message) => {
+            modalMessage.textContent = message;
+            responseModal.show();
+        };
+
+        const getQueryParam = (param) => {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        };
+
+        const resetPassword = async (evt) => {
+            evt.preventDefault();
+
+            const newPassword = newPasswordInput.value;
+            const confirmPassword = confirmPasswordInput.value;
+
+            if (newPassword !== confirmPassword) {
+                showModal("Passwords do not match.");
+                return;
+            }
+
+            const oobCode = getQueryParam('oobCode');
+
+            if (!oobCode) {
+                showModal("Invalid or missing reset code.");
+                return;
+            }
+
+            try {
+                await verifyPasswordResetCode(auth, oobCode);
+                await confirmPasswordReset(auth, oobCode, newPassword);
+                showModal("Password has been reset successfully.");
+                setTimeout(() => {
+                    window.location.href = "login.html";
+                }, 2000);
+            } catch (error) {
+                console.log(error.code);
+                console.log(error.message);
+                if (error.code === 'auth/invalid-action-code') {
+                    showModal("Invalid or expired reset code. Please request a new password reset.");
+                } else {
+                    showModal("Error: " + error.message);
+                }
+            }
+        };
+
+        resetPassForm.addEventListener('submit', resetPassword);
+    </script>
+  </body>
+</html>

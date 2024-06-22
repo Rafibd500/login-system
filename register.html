@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- fontawesome  -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+    <title>Sign Up</title>
+    <style>
+      .error-message {
+        color: red;
+        font-size: 0.875em;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="vh-100" style="background-color: #eee;">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-lg-12 col-xl-11">
+                    <div class="card text-black" style="border-radius: 25px;">
+                        <div class="card-body p-md-5">
+                            <div class="row justify-content-center">
+                                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
+
+                                    <form  id="main-form" class="mx-1 mx-md-4">
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                            <div class="form-floating w-100">
+                                                <input type="text" class="form-control mb-3 " id="first-name-input" placeholder="First Name">
+                                                <label for="first-name-input">First Name</label>
+                                                <div id="first-name-error" class="error-message"></div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                            <div class="form-floating w-100">
+                                                <input type="text" class="form-control mb-3 " id="last-name-input" placeholder="Last Name">
+                                                <label for="last-name-input">Last Name</label>
+                                                <div id="last-name-error" class="error-message"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                            <div class="form-floating mb-3 w-100">
+                                                <input type="email" class="form-control" id="email-input" placeholder="name@example.com">
+                                                <label for="email-input">Email address</label>
+                                                <div id="email-error" class="error-message"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                            <div class="form-floating w-100">
+                                                <input type="password" class="form-control mb-3" id="password-input" placeholder="Password">
+                                                <label for="password-input">Password</label>
+                                                <div id="password-error" class="error-message"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-check d-flex justify-content-center">
+                                            <p>Already have a account? <a href="login.html" class="">Log In Here</a></p>
+                                        </div>
+
+                                        <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                            <button type="submit" class="btn btn-primary btn-lg w-100">Register</button>
+                                        </div>
+
+                                    </form>
+
+                                </div>
+                                <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                                        class="img-fluid" alt="Sample image">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+        const firebaseConfig = {
+          apiKey: "AIzaSyCXPuGA3Xv2dq9HMMCHJ-Ymj9nAPcRRyfg",
+          authDomain: "ashik-login-web-1cdb2.firebaseapp.com",
+          projectId: "ashik-login-web-1cdb2",
+          storageBucket: "ashik-login-web-1cdb2.appspot.com",
+          messagingSenderId: "889582262349",
+          appId: "1:889582262349:web:82ff1f75f563e46c802404"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        let emailInp = document.getElementById("email-input");
+        let passInp = document.getElementById("password-input");
+        let fnameInp = document.getElementById("first-name-input");
+        let lnameInp = document.getElementById("last-name-input");
+        let mainForm = document.getElementById("main-form");
+        let emailError = document.getElementById("email-error");
+        let passwordError = document.getElementById("password-error");
+        let fnameError = document.getElementById("first-name-error");
+        let lnameError = document.getElementById("last-name-error");
+
+        const validateEmail = (email) => {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        };
+
+        const validatePassword = (password) => {
+            const minLength = 8;
+            const hasLowerCase = /[a-z]/.test(password);
+            const hasUpperCase = /[A-Z]/.test(password);
+            const hasNumber = /\d/.test(password);
+            const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+            let errorMessage = "";
+            if (password.length < minLength) errorMessage += `• Minimum length of ${minLength} characters.<br>`;
+            if (!hasLowerCase) errorMessage += "• Must include a lowercase letter.<br>";
+            if (!hasUpperCase) errorMessage += "• Must include an uppercase letter.<br>";
+            if (!hasNumber) errorMessage += "• Must include a number.<br>";
+            if (!hasSpecialChar) errorMessage += "• Must include a special character.<br>";
+
+            return errorMessage;
+        };
+
+        const validateName = (name) => {
+            const re = /^[a-zA-Z]+$/;
+            return re.test(name);
+        };
+
+        let registerUser = (evt) => {
+            evt.preventDefault();
+
+            let emailValid = validateEmail(emailInp.value);
+            let passwordValid = validatePassword(passInp.value);
+            let fnameValid = validateName(fnameInp.value);
+            let lnameValid = validateName(lnameInp.value);
+
+            if (!emailValid) {
+                emailError.innerHTML = "• Please enter a valid email address.";
+            } else {
+                emailError.innerHTML = "";
+            }
+
+            if (passwordValid) {
+                passwordError.innerHTML = passwordValid;
+            } else {
+                passwordError.innerHTML = "";
+            }
+
+            if (!fnameValid) {
+                fnameError.innerHTML = "• First name can only contain letters.";
+            } else {
+                fnameError.innerHTML = "";
+            }
+
+            if (!lnameValid) {
+                lnameError.innerHTML = "• Last name can only contain letters.";
+            } else {
+                lnameError.innerHTML = "";
+            }
+
+            if (emailValid && !passwordValid && fnameValid && lnameValid) {
+                createUserWithEmailAndPassword(auth, emailInp.value, passInp.value)
+                .then(async (credentials) => {
+                    var ref = doc(db, "UserAuthList", credentials.user.uid);
+                    await setDoc(ref, {
+                        firstName: fnameInp.value,
+                        lastName: lnameInp.value,
+                        email: emailInp.value
+                    });
+                    sessionStorage.setItem("user-creds", JSON.stringify(credentials.user));
+                    sessionStorage.setItem("user-info", JSON.stringify({
+                        firstName: fnameInp.value,
+                        lastName: lnameInp.value,
+                        email: emailInp.value
+                    }));
+                    window.location.href = 'login.html';
+                })
+                .catch((error) => {
+                    alert(error.message);
+                    console.log(error.code);
+                    console.log(error.message);
+                });
+            }
+        }
+
+        mainForm.addEventListener('submit', registerUser);
+    </script>
+  </body>
+</html>

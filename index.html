@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EdTech BD</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        .hover-outline {
+            outline: 1px solid rgba(0, 0, 0, 0.4);
+        }
+
+        .hover-shadow:hover {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .line-clamp-3 {
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row
+        }
+        .header-logo {
+            width: 180px;
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <div class="container py-4 d-flex justify-content-between align-items-center">
+            <div><img src="img/logo.png" alt="" class="header-logo"></div>
+            <nav class="d-flex gap-4">
+                <a href="#" class="nav-link">Home</a>
+                <a href="#" class="nav-link">Courses</a>
+                <a href="#" class="nav-link">Blog</a>
+            </nav>
+            <div class="d-flex gap-4">
+                <a href="register.html" class="nav-link">Signup</a>
+                <a href="login.html" class="nav-link">Login</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Banner -->
+    <!-- <div class="container mt-4">
+        <img src="learn-coding-online-for-free.jpg"
+            alt="Banner Image" class="img-fluid rounded w-100">
+    </div> -->
+    <div class="container mt-4">
+        <div id="carouselExampleIndicators" class="carousel slide w-100" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="img/slide1.jpg" class="d-block w-100" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="img/slide2.jpg" class="d-block w-100" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="img/slide3.jpeg" class="d-block w-100" alt="...">
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+</div>
+
+    <!-- Courses -->
+    <div class="container mt-4 flex-row">
+        <div class="w-100">
+            <div class="row">
+                <!-- 1st Course -->
+                <div class="col-4">
+                    <div class="card h-100 border border-light hover-outline hover-shadow"
+                        title="Laravel 10 - Build Multi Vendor Ecommerce Website (2024)">
+                        <img src="https://img-c.udemycdn.com/course/240x135/5212250_f6c9_2.jpg"
+                            class="card-img-top" alt="Course 1">
+                        <div class="card-body">
+                            <div class="d-flex gap-2 mb-2">
+                                <div class="badge bg-secondary text-wrap">ব্যাচ ৭</div>
+                                <div class="badge bg-secondary text-wrap">৩৪ সিট বাকি</div>
+                                <div class="badge bg-secondary text-wrap">৪ দিন বাকি</div>
+                            </div>
+                            <h5 class="card-title line-clamp-3">Laravel 10 - Build Multi Vendor Ecommerce Website (2024)</h5>
+                            <p class="card-text fw-bold">Price: ৳5000</p>
+                        </div>
+                        <div class="card-footer bg-light">
+                            <button type="button" class="btn btn-dark w-100 add-to-cart"
+                                data-course-title="Laravel 10 - Build Multi Vendor Ecommerce Website (2024)"
+                                data-course-price="5000">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2nd Course -->
+                <div class="col-4">
+                    <div class="card h-100 border border-light hover-outline hover-shadow"
+                        title="Laravel 10 - Build Multi Vendor Ecommerce Website (2024)">
+                        <img src="https://img-b.udemycdn.com/course/240x135/1362070_b9a1_2.jpg"
+                            class="card-img-top" alt="Course 2">
+                        <div class="card-body">
+                            <div class="d-flex gap-2 mb-2">
+                                <div class="badge bg-secondary text-wrap">ব্যাচ ২</div>
+                                <div class="badge bg-secondary text-wrap">১১৯ সিট বাকি</div>
+                                <div class="badge bg-secondary text-wrap">৩৫ দিন বাকি</div>
+                            </div>
+                            <h5 class="card-title line-clamp-3">React - The Complete Guide 2024 (incl. Next.js, Redux)</h5>
+                            <p class="card-text fw-bold">Price: ৳4000</p>
+                        </div>
+                        <div class="card-footer bg-light">
+                            <button type="button" class="btn btn-dark w-100 add-to-cart"
+                                data-course-title="React - The Complete Guide 2024 (incl. Next.js, Redux)"
+                                data-course-price="4000">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3rd Course -->
+                <div class="col-4">
+                    <div class="card h-100 border border-light hover-outline hover-shadow"
+                        title="The Complete Python Programming Course: Beginner to Advanced">
+                        <img src="https://cdn.ostad.app/course/cover/2024-03-11T11-15-32.800Z-Social-Media-Banner-Design%20(1).jpg"
+                            class="card-img-top" alt="Course 3">
+                        <div class="card-body">
+                            <div class="d-flex gap-2 mb-2">
+                                <div class="badge bg-secondary text-wrap">ব্যাচ ৬</div>
+                                <div class="badge bg-secondary text-wrap">১০০ সিট বাকি</div>
+                                <div class="badge bg-secondary text-wrap">৪ দিন বাকি</div>
+                            </div>
+                            <h5 class="card-title line-clamp-3">The Complete Python Programming Course: Beginner to Advanced
+                            </h5>
+                            <p class="card-text fw-bold">Price: ৳6000</p>
+                        </div>
+                        <div class="card-footer bg-light">
+                            <button type="button" class="btn btn-dark w-100 add-to-cart"
+                                data-course-title="The Complete Python Programming Course: Beginner to Advanced"
+                                data-course-price="6000">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- 4th Course -->
+                <div class="col-4 mt-4">
+                    <div class="card h-100 border border-light hover-outline hover-shadow"
+                        title="Become a WordPress Developer: Unlocking Power With Code">
+                        <img src="https://img-c.udemycdn.com/course/240x135/1010586_b622_3.jpg"
+                            class="card-img-top" alt="Course 4">
+                        <div class="card-body">
+                            <div class="d-flex gap-2 mb-2">
+                                <div class="badge bg-secondary text-wrap">ব্যাচ ৬</div>
+                                <div class="badge bg-secondary text-wrap">১০০ সিট বাকি</div>
+                                <div class="badge bg-secondary text-wrap">৪ দিন বাকি</div>
+                            </div>
+                            <h5 class="card-title line-clamp-3">Become a WordPress Developer: Unlocking Power With Code
+                            </h5>
+                            <p class="card-text fw-bold">Price: ৳6000</p>
+                        </div>
+                        <div class="card-footer bg-light">
+                            <button type="button" class="btn btn-dark w-100 add-to-cart"
+                                data-course-title="Become a WordPress Developer: Unlocking Power With Code"
+                                data-course-price="6000">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- 5th Course -->
+                <div class="col-4 mt-4">
+                    <div class="card h-100 border border-light hover-outline hover-shadow"
+                        title="The Complete Xamarin Developer Course: iOS And Android!">
+                        <img src="https://img-c.udemycdn.com/course/240x135/1419490_f988.jpg"
+                            class="card-img-top" alt="Course 5">
+                        <div class="card-body">
+                            <div class="d-flex gap-2 mb-2">
+                                <div class="badge bg-secondary text-wrap">ব্যাচ ৬</div>
+                                <div class="badge bg-secondary text-wrap">১০০ সিট বাকি</div>
+                                <div class="badge bg-secondary text-wrap">৪ দিন বাকি</div>
+                            </div>
+                            <h5 class="card-title line-clamp-3">The Complete Xamarin Developer Course: iOS And Android!</h5>
+                            <p class="card-text fw-bold">Price: ৳6000</p>
+                        </div>
+                        <div class="card-footer bg-light">
+                            <button type="button" class="btn btn-dark w-100 add-to-cart"
+                                data-course-title="The Complete Xamarin Developer Course: iOS And Android!"
+                                data-course-price="6000">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- 6th Course -->
+                <div class="col-4 mt-4">
+                    <div class="card h-100 border border-light hover-outline hover-shadow"
+                        title="Complete Guide to Build IOT Things from Scratch to Market">
+                        <img src="https://img-c.udemycdn.com/course/240x135/709804_c5cd_5.jpg"
+                            class="card-img-top" alt="Course 6">
+                        <div class="card-body">
+                            <div class="d-flex gap-2 mb-2">
+                                <div class="badge bg-secondary text-wrap">ব্যাচ ৬</div>
+                                <div class="badge bg-secondary text-wrap">১০০ সিট বাকি</div>
+                                <div class="badge bg-secondary text-wrap">৪ দিন বাকি</div>
+                            </div>
+                            <h5 class="card-title line-clamp-3">Complete Guide to Build IOT Things from Scratch to Market</h5>
+                            <p class="card-text fw-bold">Price: ৳6000</p>
+                        </div>
+                        <div class="card-footer bg-light">
+                            <button type="button" class="btn btn-dark w-100 add-to-cart"
+                                data-course-title="Complete Guide to Build IOT Things from Scratch to Market"
+                                data-course-price="6000">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="login-modal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Authentication Required</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>You need to log in or sign up to purchase courses.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <a href="register.html" class="btn btn-primary">Sign Up</a>
+                    <a href="login.html" class="btn btn-primary">Log In</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        const purchaseBtn = document.getElementById('purchase-btn');
+        const loginModal = new bootstrap.Modal(document.getElementById('login-modal'));
+
+        function isUserLoggedIn() {
+            // Check user login status from session storage
+            return sessionStorage.getItem('user-logged-in') === 'true';
+        }
+
+        function showLoginModal() {
+            loginModal.show();
+        }
+
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                if (!isUserLoggedIn()) {
+                    showLoginModal();
+                    return;
+                }
+
+                // Handle add to cart logic here
+                alert('Course added to cart!'); // Temporary placeholder
+            });
+        });
+
+        purchaseBtn.addEventListener('click', function () {
+            if (!isUserLoggedIn()) {
+                showLoginModal();
+                return;
+            }
+
+            // Handle purchase logic here
+            alert('Proceed to purchase!'); // Temporary placeholder
+        });
+
+        // Simulate user login status (for demo purposes)
+        // sessionStorage.setItem('user-logged-in', 'true'); // Uncomment this line to simulate a logged-in user
+    </script>
+</body>
+
+</html>

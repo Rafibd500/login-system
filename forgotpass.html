@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- fontawesome  -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+
+
+    <title>Forgot Password</title>
+  </head>
+  <body>
+    <section class="vh-100" style="background-color: #eee;">
+      <div class="container h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+              <div class="col-lg-12 col-xl-11">
+                  <div class="card text-black" style="border-radius: 25px;">
+                      <div class="card-body p-md-5">
+                          <div class="row justify-content-center">
+                              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                                  <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Forget Password</p>
+
+                                  <form  id="forgotpass-form" class="mx-1 mx-md-4">
+                                      <div class="d-flex flex-row align-items-center mb-4">
+                                          <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                          <div class="form-floating mb-3 w-100">
+                                              <input type="email" class="form-control" id="email-input" placeholder="name@example.com">
+                                              <label for="email-input">Email address</label>
+                                          </div>
+                                      </div>
+
+
+                                      <div class="mx-4 mb-3 mb-lg-4 text-center">
+                                          <button type="submit" class="btn btn-primary w-100 mt-2 mb-4">Send Reset Link</button>
+
+                                          <a href="login.html" class="btn btn-success w-75 mt-2 mb-4">Login</a>
+
+
+                                      </div>
+
+                                  </form>
+
+                              </div>
+                              <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                                      class="img-fluid" alt="Sample image">
+
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+
+    <!-- Modal -->
+    <div class="modal fade" id="responseModal" tabindex="-1" aria-labelledby="responseModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="responseModalLabel">Notification</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" id="modal-message">
+            <!-- Message will be inserted here -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        import { getAuth, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyCXPuGA3Xv2dq9HMMCHJ-Ymj9nAPcRRyfg",
+          authDomain: "ashik-login-web-1cdb2.firebaseapp.com",
+          projectId: "ashik-login-web-1cdb2",
+          storageBucket: "ashik-login-web-1cdb2.appspot.com",
+          messagingSenderId: "889582262349",
+          appId: "1:889582262349:web:82ff1f75f563e46c802404"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        let emailInp = document.getElementById("email-input");
+        let forgotPassForm = document.getElementById("forgotpass-form");
+        let responseModal = new bootstrap.Modal(document.getElementById('responseModal'));
+        let modalMessage = document.getElementById("modal-message");
+
+        let showModal = (message) => {
+            modalMessage.textContent = message;
+            responseModal.show();
+        };
+
+        let forgotPass = async (evt) => {
+            evt.preventDefault();
+            // Check if the email exists in the Firestore database
+            const q = query(collection(db, "UserAuthList"), where("email", "==", emailInp.value));
+            const querySnapshot = await getDocs(q);
+            
+            if (querySnapshot.empty) {
+                showModal("No user found with this email.");
+            } else {
+                sendPasswordResetEmail(auth, emailInp.value)
+                .then(() => {
+                    showModal("A password reset link has been sent to your email.");
+                })
+                .catch((error) => {
+                    console.log(error.code);
+                    console.log(error.message);
+                    showModal("Error: " + error.message);
+                });
+            }
+        };
+
+        forgotPassForm.addEventListener('submit', forgotPass);
+    </script>
+  </body>
+</html>
